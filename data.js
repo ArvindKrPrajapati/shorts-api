@@ -1,0 +1,46 @@
+const data =[
+    {
+        id:1,
+        link:"https://res.cloudinary.com/shivraj-technology/video/upload/v1655567887/279254610_1151117615449419_2601272888201710659_n_eqglsf.mp4"
+    },
+    {
+        id:2,
+        link:"https://res.cloudinary.com/shivraj-technology/video/upload/v1655567886/281013150_574250577324533_5239988571366490171_n_n4uuoj.mp4"
+    },
+    {
+        id:3,
+        link:"https://res.cloudinary.com/shivraj-technology/video/upload/v1655567884/284233312_1412336609196272_5958367241487931291_n_nomtvj.mp4"
+    },
+    {
+        id:4,
+        link:"https://res.cloudinary.com/shivraj-technology/video/upload/v1655567883/278920493_1116706355573495_8117811539967745905_n_sfg56g.mp4"
+    },
+    {
+        id:5,
+        link:"https://res.cloudinary.com/shivraj-technology/video/upload/v1655567812/6C4485D335DCD47E3BA0893ABAD299A1_video_dashinit_fpoaby.mp4"
+    },
+    {
+        id:6,
+        link:"https://res.cloudinary.com/shivraj-technology/video/upload/v1655567887/279254610_1151117615449419_2601272888201710659_n_eqglsf.mp4"
+    },
+    {
+        id:7,
+        link:"https://res.cloudinary.com/shivraj-technology/video/upload/v1655567886/281013150_574250577324533_5239988571366490171_n_n4uuoj.mp4"
+    },
+    {
+        id:8,
+        link:"https://res.cloudinary.com/shivraj-technology/video/upload/v1655567884/284233312_1412336609196272_5958367241487931291_n_nomtvj.mp4"
+    },
+    {
+        id:9,
+        link:"https://res.cloudinary.com/shivraj-technology/video/upload/v1655567883/278920493_1116706355573495_8117811539967745905_n_sfg56g.mp4"
+    },
+    {
+        id:10,
+        link:"https://res.cloudinary.com/shivraj-technology/video/upload/v1655567812/6C4485D335DCD47E3BA0893ABAD299A1_video_dashinit_fpoaby.mp4"
+    },
+]
+
+module.exports={
+    data
+}

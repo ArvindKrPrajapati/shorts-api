@@ -1,6 +1,7 @@
 const express= require("express")
 const app=express()
 const cors=require("cors")
+const {data}=require("./data")
 require("dotenv").config()
 var nodemailer = require('nodemailer');
 
@@ -10,8 +11,8 @@ app.use(express.json())
 app.use(cors())
 
 app.get("/", (req, res) => {
-    res.type('json').send(JSON.stringify({ welcome: "welcome" }, null, 2) + '\n')
-  })
+   res.status(200).json(data)
+})
 
 // send mail route
 app.post("/send-mail", (req, res) => {
