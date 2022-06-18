@@ -11,7 +11,7 @@ app.use(express.json())
 app.use(cors())
 
 app.get("/", (req, res) => {
-   res.status(200).json(data)
+   res.status(200).json({success:true,data})
 })
 
 // send mail route
