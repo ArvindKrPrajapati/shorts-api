@@ -17,6 +17,7 @@ app.get("/", (req, res) => {
     res.status(200).json({ success: true, data })
 })
 // // send mail route
+// lets push
 app.post("/send-mail", (req, res) => {
     try {
         const { name, email, text } = req.body
