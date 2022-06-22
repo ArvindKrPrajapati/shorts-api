@@ -34,6 +34,9 @@ const sendOtp = async (req, res) => {
                 })
                 .then((message) => {
                     return res.status(200).json({ success: true, data: { message: "otp send to " + mobile + " number" } })
+                })
+                .catch((err)=>{
+                    return res.status(200).json({ success: true, data: { message: "otp send to " + mobile + " number" } })
                 });
         } else {
             return res.status(400).json({ success: false, message: "invalid number" })
@@ -46,7 +49,6 @@ const sendOtp = async (req, res) => {
 const variefyOtp = async (req, res) => {
     try {
         const { mobile, otp } = req.body
-        // res.json({mobile,otp})
         if (!mobile && !otp) {
             return res.status(400).json({ success: false, message: "mobile and otp both are required" })
         }
@@ -67,12 +69,12 @@ const variefyOtp = async (req, res) => {
                     token = jwt.sign({_id:newUser._id, mobile: newUser.mobile, name: newUser.name }, process.env.JWT_SECRET);
                 }
                 await otps.findOneAndDelete({ mobile })
-                return res.status(200).json({ success: true, data: { token, varification: true } })
+                return res.status(200).json({ success: true, data: token })
             } else {
-                return res.status(200).json({ success: true, data: { message: "invalid otp", varification: false } })
+                return res.status(401).json({ success: false, message: "wrong otp" })
             }
         } else {
-            return res.status(400).json({ success: false, message: "invalid number" })
+            return res.status(400).json({ success: false, message: "invalid number or otp" })
         }
     } catch (error) {
         return res.status(500).json({ success: false, message: "server error" })
