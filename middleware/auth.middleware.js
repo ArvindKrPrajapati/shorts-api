@@ -15,6 +15,6 @@ const authlogin=(req,res,next)=>{
     }else{
         res.status(401).json({success:false,message:"no token provided ,hence not authorize to access this route"})
     }
- next()
+//  next()
 }
 module.exports=authlogin
