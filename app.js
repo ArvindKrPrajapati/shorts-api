@@ -16,8 +16,8 @@ app.use("/v1/post",authlogin, postroute)
 app.get("/", (req, res) => {
     res.status(200).json({ success: true, data })
 })
-// // send mail route
-// lets push
+// send mail route
+
 app.post("/send-mail", (req, res) => {
     try {
         const { name, email, text } = req.body
