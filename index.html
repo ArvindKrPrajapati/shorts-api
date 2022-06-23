@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button onclick="getData()">Click</button>
+</body>
+
+</html>
+
+<script>
+    const getData = () => {
+        fetch("https://api-shorts.herokuapp.com/v1/post/create", {
+            method: 'POST',
+            body:JSON.stringify({url:"hgf",desc:"FH"}),
+            headers: {
+                'content-type': 'application/json',
+                'Authorization':'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmIyMDY5MTk5MzE5MTNiZDcxNmZjODQiLCJtb2JpbGUiOjg3ODkwOTY0MzcsIm5hbWUiOiJ1c2VyMzg1NDEiLCJpYXQiOjE2NTU4MzQyNTd9.Fq2TLVGPSp6qdaLEEd8JKBLSbtv7iy1U7b0Xb6ag1G0'
+            }
+        })
+            .then(res => res.json())
+            .then((data) => {
+                console.log(data);
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+    }
+</script>

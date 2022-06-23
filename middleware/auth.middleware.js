@@ -10,11 +10,11 @@ const authlogin=(req,res,next)=>{
             req.userid=decoded._id
         //    console.log(decoded);
         } catch (error) {
-            res.status(401).json({success:false,message:"you are not authorize to access this route"})
+           return res.status(401).json({success:false,message:"you are not authorize to access this route"})
         }
     }else{
-        res.status(401).json({success:false,message:"no token provided ,hence not authorize to access this route"})
+       return res.status(401).json({success:false,message:"no token provided ,hence not authorize to access this route"})
     }
-//  next()
+ next()
 }
 module.exports=authlogin
