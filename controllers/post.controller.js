@@ -3,11 +3,11 @@ const post = require('../modals/post.modal')
 const createPost = async (req, res) => {
     try {
         const { url, desc } = req.body
-        if (url && desc) {
+        if (url) {
             const data = await post.create({ url, desc, postedby: req.userid })
             res.status(200).json({ success: true, data: { message: "post created" } })
         } else {
-            res.status(404).json({ success: false, message: "url and desc is required" })
+            res.status(404).json({ success: false, message: "url is required" })
         }
     } catch (error) {
         res.status(500).json({ success: false, message: "server error" })
