@@ -26,6 +26,12 @@ const post=new mongoose.Schema({
           datetime : { type : Date, default: Date.now }
       }
   ],
+  views:[
+    {
+        by:{type:ObjectId,ref:'user'},
+        datetime : { type : Date, default: Date.now }
+    }
+],
   datetime : { type : Date, default: Date.now }
 
 })
