@@ -53,9 +53,21 @@ const myPosts = async (req, res) => {
 
 const getAllPost = async (req, res) => {
     try {
-        const data = await post.find({}).populate("postedby", "_id name image").select("-__v")
+        const data =await post.aggregate([
+            { $lookup: { from: 'users', localField: 'postedby', foreignField: '_id', as: 'postedby' } },
+            {$project:{
+                url:1,
+                desc:1,
+                postedby:{_id:1,name:1,image:1},
+                likes:{$cond:{if:{$isArray:"$likes"},then:{$size:"$likes"},else:0}},
+                comments:{$cond:{if:{$isArray:"$comments"},then:{$size:"$comments"},else:0}},
+            }},
+            {$addFields:{isLiked:false}}
+        ])
+    //  const data = await post.find({}).populate("postedby", "_id name image").select("-__v")
         res.status(200).json({ success: true, data })
     } catch (error) {
+        console.log(error)
         res.status(500).json({ success: false, message: "server error" })
     }
 }
@@ -63,3 +75,10 @@ const getAllPost = async (req, res) => {
 module.exports = {
     createPost, getAllPost, myPosts
 }
+
+
+
+
+
+
+// {$sort:{datetime:-1}},
