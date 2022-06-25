@@ -55,6 +55,7 @@ const getAllPost = async (req, res) => {
     try {
         const data =await post.aggregate([
             { $lookup: { from: 'users', localField: 'postedby', foreignField: '_id', as: 'postedby' } },
+            {$unwind:'$postedby'},
             {$project:{
                 url:1,
                 desc:1,
