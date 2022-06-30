@@ -6,6 +6,10 @@ const post=new mongoose.Schema({
       type:String,
       required:true
   },
+  thumb:{
+    type:String,
+    required:true
+  },
   desc:{
     type:String,
     trim:true,
