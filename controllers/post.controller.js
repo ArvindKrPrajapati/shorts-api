@@ -2,12 +2,12 @@ const post = require('../modals/post.modal')
 const mongoose = require("mongoose")
 const createPost = async (req, res) => {
     try {
-        const { url, desc } = req.body
-        if (url) {
-            const data = await post.create({ url, desc, postedby: req.userid })
+        const { url, desc, poster } = req.body
+        if (url && poster) {
+            const data = await post.create({ poster, url, desc, postedby: req.userid })
             res.status(200).json({ success: true, data: { message: "post created" } })
         } else {
-            res.status(404).json({ success: false, message: "url is required" })
+            res.status(404).json({ success: false, message: "url and poster is required" })
         }
     } catch (error) {
         res.status(500).json({ success: false, message: "server error" })

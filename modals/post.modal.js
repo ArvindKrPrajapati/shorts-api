@@ -6,7 +6,7 @@ const post=new mongoose.Schema({
       type:String,
       required:true
   },
-  thumb:{
+  poster:{
     type:String,
     required:true
   },
