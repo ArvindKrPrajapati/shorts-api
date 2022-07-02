@@ -32,6 +32,7 @@ const myPosts = async (req, res) => {
                 {
                     $project: {
                         url: 1,
+                        poster:1,
                         views: { $cond: { if: { $isArray: "$views" }, then: { $size: "$views" }, else: 0 } },
                         likes: { $cond: { if: { $isArray: "$likes" }, then: { $size: "$likes" }, else: 0 } },
                         comments: { $cond: { if: { $isArray: "$comments" }, then: { $size: "$comments" }, else: 0 } }
