@@ -14,7 +14,8 @@ const user=new mongoose.Schema({
         maxlength:30
     },
     image:{
-        type:String
+        type:String,
+        default:''
     },
     desc:{
         type:String,
