@@ -33,6 +33,16 @@ const getUserById = async (req, res) => {
     }
 }
 
+const liveSearch=async (req,res)=>{
+    try {
+        const {name}=req.query
+          const data=await user.find({name:{$regex: '^' + name, $options: 'i'}}).select("name image _id").sort({datetime:-1})
+          res.status(200).json({success:true,data})
+    } catch (error) {
+      res.status(500).json({success:false,error:"server error"})
+    }
+  }
 module.exports = {
-    getUserById
+    getUserById,
+    liveSearch
 }
