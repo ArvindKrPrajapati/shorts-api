@@ -137,6 +137,7 @@ const getAllPost = async (req, res) => {
                 $project: {
                     url: 1,
                     desc: 1,
+                    poster:1,
                     isLiked: { $in: [mongoose.Types.ObjectId(req.userid), "$likes.by"] },
                     postedby: { _id: 1, name: 1, image: 1 },
                     likes: { $cond: { if: { $isArray: "$likes" }, then: { $size: "$likes" }, else: 0 } },

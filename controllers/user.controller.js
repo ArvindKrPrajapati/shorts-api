@@ -39,7 +39,7 @@ const liveSearch=async (req,res)=>{
           const data=await user.find({name:{$regex: '^' + name, $options: 'i'}}).select("name image _id").sort({datetime:-1})
           res.status(200).json({success:true,data})
     } catch (error) {
-      res.status(500).json({success:false,error:"server error"})
+      res.status(500).json({success:false,message:"server error"})
     }
   }
 module.exports = {
