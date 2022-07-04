@@ -32,7 +32,7 @@ const myPosts = async (req, res) => {
                 {
                     $project: {
                         url: 1,
-                        poster:1,
+                        poster: 1,
                         views: { $cond: { if: { $isArray: "$views" }, then: { $size: "$views" }, else: 0 } },
                         likes: { $cond: { if: { $isArray: "$likes" }, then: { $size: "$likes" }, else: 0 } },
                         comments: { $cond: { if: { $isArray: "$comments" }, then: { $size: "$comments" }, else: 0 } }
@@ -130,26 +130,26 @@ const getComments = async (req, res) => {
 
 const getAllPost = async (req, res) => {
     try {
+        const skip = Number(req.query.skip) || 0
         const data = await post.aggregate([
+            { $skip: skip },
+            { $limit: 10 },
             { $lookup: { from: 'users', localField: 'postedby', foreignField: '_id', as: 'postedby' } },
             { $unwind: '$postedby' },
             {
                 $project: {
                     url: 1,
                     desc: 1,
-                    poster:1,
+                    poster: 1,
                     isLiked: { $in: [mongoose.Types.ObjectId(req.userid), "$likes.by"] },
                     postedby: { _id: 1, name: 1, image: 1 },
                     likes: { $cond: { if: { $isArray: "$likes" }, then: { $size: "$likes" }, else: 0 } },
                     comments: { $cond: { if: { $isArray: "$comments" }, then: { $size: "$comments" }, else: 0 } },
                 }
             },
-            // { $addFields: { isLiked: false } }
         ])
-        //  const data = await post.find({}).populate("postedby", "_id name image").select("-__v")
         res.status(200).json({ success: true, data })
     } catch (error) {
-        console.log(error)
         res.status(500).json({ success: false, message: "server error" })
     }
 }
