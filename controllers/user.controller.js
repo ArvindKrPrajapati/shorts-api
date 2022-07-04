@@ -42,7 +42,21 @@ const liveSearch=async (req,res)=>{
       res.status(500).json({success:false,message:"server error"})
     }
   }
+
+  const editProfile=async (req,res)=>{
+    try {
+        const {name,desc}=req.body
+        if (!name) {
+            return res.status(404).json({ success: false, message: "name is not provided" })
+          }
+          const data=await user.findByIdAndUpdate(req.userid,{name,desc})
+          res.status(200).json({success:true,data:"updated"})
+    } catch (error) {
+      res.status(500).json({success:false,message:"server error"})
+    }
+  }
 module.exports = {
     getUserById,
-    liveSearch
+    liveSearch,
+    editProfile
 }

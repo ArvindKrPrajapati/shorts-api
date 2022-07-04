@@ -20,7 +20,8 @@ const user=new mongoose.Schema({
     desc:{
         type:String,
         trim:true,
-        maxlength:50
+        maxlength:50,
+        default:''
     },
     datetime: {
         type: Date,
