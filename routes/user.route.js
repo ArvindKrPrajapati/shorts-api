@@ -4,5 +4,5 @@ const { getUserById, liveSearch, editProfile, updateDp } = require("../controlle
 user.get("/",getUserById)
 user.get("/search",liveSearch)
 user.patch("/edit",editProfile)
-user.patch("/edit/dp",updateDp)
+user.patch("/updatedp",updateDp)
 module.exports=user
