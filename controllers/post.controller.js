@@ -132,9 +132,9 @@ const getAllPost = async (req, res) => {
     try {
         const skip = Number(req.query.skip) || 0
         const data = await post.aggregate([
+            {$sort:{datetime:-1}},
             { $skip: skip },
             { $limit: 10 },
-            {$sort:{datetime:-1}},
             { $lookup: { from: 'users', localField: 'postedby', foreignField: '_id', as: 'postedby' } },
             { $unwind: '$postedby' },
             {
