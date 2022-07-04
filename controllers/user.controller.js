@@ -55,8 +55,22 @@ const liveSearch=async (req,res)=>{
       res.status(500).json({success:false,message:"server error"})
     }
   }
+
+  const updateDp=async (req,res)=>{
+    try {
+        const {url}=req.body
+        if (!url) {
+            return res.status(404).json({ success: false, message: "url is not provided" })
+          }
+          const data=await user.findByIdAndUpdate(req.userid,{image:url})
+          res.status(200).json({success:true,data:"updated"})
+    } catch (error) {
+      res.status(500).json({success:false,message:"server error"})
+    }
+  }
 module.exports = {
     getUserById,
     liveSearch,
-    editProfile
+    editProfile,
+    updateDp
 }
