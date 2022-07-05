@@ -12,7 +12,7 @@ const getUserById = async (req, res) => {
         }
         if (mongoose.Types.ObjectId.isValid(_id)) {
             _id = mongoose.Types.ObjectId(_id)
-            const userInfo = await user.findOne({ _id }).select('_id name desc image')
+            const userInfo = await user.findOne({ _id }).select('_id name desc image isVarified')
             if (!userInfo) {
                 return res.status(404).json({ success: false, message: 'user not found' })
             }
@@ -22,7 +22,7 @@ const getUserById = async (req, res) => {
             const followings=await follow.find({by:_id}).count()
             
             return res.status(200).json({ success: true, data:{
-                name:userInfo.name,_id:userInfo._id,desc:userInfo.desc,image:userInfo.image,
+                name:userInfo.name,_id:userInfo._id,desc:userInfo.desc,image:userInfo.image,isVarified:userInfo.isVarified,
                 shorts:shorts,ifollow:ifollow==0 ? false : true,
                 followers,followings
             } })
@@ -38,7 +38,7 @@ const getUserById = async (req, res) => {
 const liveSearch=async (req,res)=>{
     try {
         const {name}=req.query
-          const data=await user.find({name:{$regex: '^' + name, $options: 'i'}}).select("name image _id").sort({datetime:-1})
+          const data=await user.find({name:{$regex: '^' + name, $options: 'i'}}).select("name image _id isVarified").sort({datetime:-1})
           res.status(200).json({success:true,data})
     } catch (error) {
       res.status(500).json({success:false,message:"server error"})

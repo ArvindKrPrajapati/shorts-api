@@ -23,6 +23,10 @@ const user=new mongoose.Schema({
         maxlength:50,
         default:''
     },
+    isVarified:{
+        type:Boolean,
+        default:false
+    },
     datetime: {
         type: Date,
         default: Date.now

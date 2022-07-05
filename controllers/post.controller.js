@@ -112,7 +112,7 @@ const getComments = async (req, res) => {
                 {
                     $project: {
                         comments: { _id: 1, comm: 1 },
-                        by: { _id: 1, name: 1, image: 1 },
+                        by: { _id: 1, name: 1, image: 1,isVarified:1 },
                         _id: 0
                     }
                 },
@@ -132,7 +132,7 @@ const getAllPost = async (req, res) => {
     try {
         const skip = Number(req.query.skip) || 0
         const data = await post.aggregate([
-            {$sort:{datetime:-1}},
+            { $sort: { datetime: -1 } },
             { $skip: skip },
             { $limit: 10 },
             { $lookup: { from: 'users', localField: 'postedby', foreignField: '_id', as: 'postedby' } },
@@ -143,7 +143,7 @@ const getAllPost = async (req, res) => {
                     desc: 1,
                     poster: 1,
                     isLiked: { $in: [mongoose.Types.ObjectId(req.userid), "$likes.by"] },
-                    postedby: { _id: 1, name: 1, image: 1 },
+                    postedby: { _id: 1, name: 1, image: 1, isVarified: 1 },
                     likes: { $cond: { if: { $isArray: "$likes" }, then: { $size: "$likes" }, else: 0 } },
                     comments: { $cond: { if: { $isArray: "$comments" }, then: { $size: "$comments" }, else: 0 } },
                 }
