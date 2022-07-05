@@ -62,7 +62,7 @@ const variefyOtp = async (req, res) => {
                 const userExists = await user.findOne({ mobile })
                 var token;
                 if (userExists) {
-                    token = jwt.sign({_id:userExists._id, image: userExists.image, name: userExists.name }, process.env.JWT_SECRET);
+                    token = jwt.sign({_id:userExists._id, name: userExists.name }, process.env.JWT_SECRET);
                 } else {
                     const name = "user" + Math.floor(10000 + Math.random() * 90000);
                     const newUser = await user.create({ mobile, name })
