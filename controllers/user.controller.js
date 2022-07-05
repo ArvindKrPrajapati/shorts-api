@@ -52,7 +52,7 @@ const liveSearch=async (req,res)=>{
             return res.status(404).json({ success: false, message: "name is not provided" })
           }
           const data=await user.findByIdAndUpdate(req.userid,{name,desc},{new:true})
-          const token = jwt.sign(JSON.stringify({_id:data._id,image:data.image, name: data.name }), process.env.JWT_SECRET)
+          const token = jwt.sign(JSON.stringify({_id:data._id,image:data.image, name: data.name,isVarified:data.isVarified }), process.env.JWT_SECRET)
           res.status(200).json({success:true,data:token})
     } catch (error) {
       res.status(500).json({success:false,message:"server error"})
@@ -66,7 +66,7 @@ const liveSearch=async (req,res)=>{
             return res.status(404).json({ success: false, message: "url is not provided" })
           }
           const data=await user.findByIdAndUpdate(req.userid,{image:url},{new:true})
-          const token = jwt.sign(JSON.stringify({_id:data._id,image:data.image, name: data.name }), process.env.JWT_SECRET)
+          const token = jwt.sign(JSON.stringify({_id:data._id,image:data.image, name: data.name,isVarified:data.isVarified }), process.env.JWT_SECRET)
           res.status(200).json({success:true,data:token})
     } catch (error) {
       res.status(500).json({success:false,message:"server error"})
