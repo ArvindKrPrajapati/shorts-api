@@ -1,6 +1,8 @@
 const user = require("../modals/user.modal")
 const post = require("../modals/post.modal")
 const follow = require("../modals/follow.modal")
+const jwt = require('jsonwebtoken');
+
 const mongoose = require('mongoose');
 const getUserById = async (req, res) => {
     try {
@@ -49,8 +51,9 @@ const liveSearch=async (req,res)=>{
         if (!name) {
             return res.status(404).json({ success: false, message: "name is not provided" })
           }
-          const data=await user.findByIdAndUpdate(req.userid,{name,desc})
-          res.status(200).json({success:true,data:"updated"})
+          const data=await user.findByIdAndUpdate(req.userid,{name,desc},{new:true})
+          const token = jwt.sign({_id:data._id, image: data.image, name: data.name }, process.env.JWT_SECRET)
+          res.status(200).json({success:true,data:token})
     } catch (error) {
       res.status(500).json({success:false,message:"server error"})
     }
@@ -63,7 +66,8 @@ const liveSearch=async (req,res)=>{
             return res.status(404).json({ success: false, message: "url is not provided" })
           }
           const data=await user.findByIdAndUpdate(req.userid,{image:url})
-          res.status(200).json({success:true,data:"updated"})
+          const token = jwt.sign({_id:data._id, image: data.image, name: data.name }, process.env.JWT_SECRET)
+          res.status(200).json({success:true,data:token})
     } catch (error) {
       res.status(500).json({success:false,message:"server error"})
     }
