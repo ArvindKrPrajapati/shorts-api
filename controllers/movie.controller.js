@@ -13,6 +13,29 @@ const addMovie = async (req, res) => {
     }
 }
 
+const getAllMovie = async (req, res) => {
+    try {
+        const resData = await movie.find({}).sort({date_time:-1});
+        return res.status(200).json({ success: true, data: resData })
+
+    } catch (error) {
+        return res.status(500).json({ success: false, message: "server error" })
+    }
+}
+
+const getMovieById = async (req, res) => {
+    try {
+        const {id}=req.query
+        const resData = await movie.findOne({id});
+        return res.status(200).json({ success: true, data: resData })
+
+    } catch (error) {
+        return res.status(500).json({ success: false, message: "server error" })
+    }
+}
+
 module.exports = {
-    addMovie
+    addMovie,
+    getAllMovie,
+    getMovieById
 }

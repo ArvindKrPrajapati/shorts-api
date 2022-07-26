@@ -57,7 +57,11 @@ const movie = new mongoose.Schema(
                 p_720:String,
                 p_1080:String
             },
-        ]
+        ],
+        datetime: {
+            type: Date,
+            default: Date.now
+        }
     }
 )
 
