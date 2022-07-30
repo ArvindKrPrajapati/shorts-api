@@ -52,10 +52,10 @@ const movie = new mongoose.Schema(
         vote_count: Number,
         links: [
             {
-                p_320:String,
-                p_480:String,
-                p_720:String,
-                p_1080:String
+                p_320:{type:String,default:""},
+                p_480:{type:String,default:""},
+                p_720:{type:String,default:""},
+                p_1080:{type:String,default:""},
             },
         ],
         datetime: {
