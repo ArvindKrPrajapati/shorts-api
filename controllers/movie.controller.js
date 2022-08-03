@@ -40,8 +40,20 @@ const getMovieById = async (req, res) => {
     }
 }
 
+const deleteById = async (req, res) => {
+    try {
+        const {id}=req.query
+        const resData = await movie.findByIdAndRemove(id);
+        return res.status(200).json({ success: true, data: resData })
+
+    } catch (error) {
+        return res.status(500).json({ success: false, message: "server error" })
+    }
+}
+
 module.exports = {
     addMovie,
     getAllMovie,
-    getMovieById
+    getMovieById,
+    deleteById
 }
