@@ -21,7 +21,7 @@ const getAllMovie = async (req, res) => {
         if(page >0){
            skip=(page-1)*limit
         }
-        const resData = await movie.find({}).sort({datetime:-1}).skip(skip).limit(limit)
+        const resData = await movie.find({}).sort({release_date:-1}).skip(skip).limit(limit)
         return res.status(200).json({ success: true, data: resData })
 
     } catch (error) {
